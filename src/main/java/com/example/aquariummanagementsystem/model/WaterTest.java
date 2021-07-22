@@ -1,0 +1,102 @@
+package com.example.aquariummanagementsystem.model;
+
+
+import javax.persistence.*;
+import java.time.LocalDate;
+
+@Entity
+public class WaterTest
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    private User user;
+
+    LocalDate conductedOn;
+
+    private Double nitrateLvl;
+    private Double nitriteLvl;
+    private Double ammoniaLvl;
+    private Double phLvl;
+
+
+    public Long getId()
+    {
+        return id;
+    }
+
+    public void setId(Long id)
+    {
+        this.id = id;
+    }
+
+    public LocalDate getConductedOn()
+    {
+        return conductedOn;
+    }
+
+    public void setConductedOn(LocalDate conducted)
+    {
+        this.conductedOn = conducted;
+    }
+
+    public Double getNitrateLvl()
+    {
+        return nitrateLvl;
+    }
+
+    public void setNitrateLvl(Double nitrateLvl)
+    {
+        this.nitrateLvl = nitrateLvl;
+    }
+
+    public Double getNitriteLvl()
+    {
+        return nitriteLvl;
+    }
+
+    public void setNitriteLvl(Double nitriteLvl)
+    {
+        this.nitriteLvl = nitriteLvl;
+    }
+
+    public Double getAmmoniaLvl()
+    {
+        return ammoniaLvl;
+    }
+
+    public void setAmmoniaLvl(Double ammoniaLvl)
+    {
+        this.ammoniaLvl = ammoniaLvl;
+    }
+
+    public Double getPhLvl()
+    {
+        return phLvl;
+    }
+
+    public void setPhLvl(Double phLvl)
+    {
+        this.phLvl = phLvl;
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "WaterTest{" +
+                "id=" + id +
+                ", conductedOn=" + conductedOn +
+                ", nitrateLvl=" + nitrateLvl +
+                ", nitriteLvl=" + nitriteLvl +
+                ", ammoniaLvl=" + ammoniaLvl +
+                ", phLvl=" + phLvl +
+                '}';
+    }
+}
