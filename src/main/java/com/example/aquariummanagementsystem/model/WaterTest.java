@@ -3,6 +3,7 @@ package com.example.aquariummanagementsystem.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 public class WaterTest
@@ -14,7 +15,7 @@ public class WaterTest
     @ManyToOne
     private User user;
 
-    LocalDate conductedOn;
+    Date conductedOn;
 
     private Double nitrateLvl;
     private Double nitriteLvl;
@@ -32,12 +33,12 @@ public class WaterTest
         this.id = id;
     }
 
-    public LocalDate getConductedOn()
+    public Date getConductedOn()
     {
         return conductedOn;
     }
 
-    public void setConductedOn(LocalDate conducted)
+    public void setConductedOn(Date conducted)
     {
         this.conductedOn = conducted;
     }

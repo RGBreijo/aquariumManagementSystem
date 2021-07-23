@@ -22,6 +22,7 @@ public class WaterTestController
     @PostMapping("/{username}/watertests")
     public void saveWaterTest(@RequestBody WaterTest waterTest, @PathVariable String username)
     {
+        System.out.println();
         waterTestService.saveWaterTest(waterTest, username);
     }
 
