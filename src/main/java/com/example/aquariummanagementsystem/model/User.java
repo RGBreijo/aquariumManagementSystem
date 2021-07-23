@@ -1,6 +1,8 @@
 package com.example.aquariummanagementsystem.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -15,12 +17,11 @@ public class User
     private String email;
 
     @OneToMany(mappedBy = "user")
-    private List<WaterTest> waterTests;
+    private List<Aquarium> aquariums;
 
-
-    @OneToMany
-    private List<Fish> fish;
-
+    public User()
+    {
+    }
 
     public Long getId()
     {
@@ -52,16 +53,15 @@ public class User
         this.email = email;
     }
 
-    public List<WaterTest> getWaterTests()
+    public List<Aquarium> getAquariums()
     {
-        return waterTests;
+        return aquariums;
     }
 
-    public void setWaterTests(List<WaterTest> waterTests)
+    public void setAquariums(List<Aquarium> aquariums)
     {
-        this.waterTests = waterTests;
+        this.aquariums = aquariums;
     }
-
 
     @Override
     public String toString()
@@ -70,8 +70,7 @@ public class User
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", waterTests=" + waterTests +
-                ", fish=" + fish +
+                ", aquariums=" + aquariums +
                 '}';
     }
 }

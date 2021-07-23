@@ -11,7 +11,8 @@ import java.util.List;
 @RestController
 public class WaterTestController
 {
-    private WaterTestService waterTestService;
+    private final WaterTestService waterTestService;
+
 
     @Autowired
     public WaterTestController(WaterTestService waterTestService)
@@ -19,17 +20,16 @@ public class WaterTestController
         this.waterTestService = waterTestService;
     }
 
-    @PostMapping("/{username}/watertests")
-    public void saveWaterTest(@RequestBody WaterTest waterTest, @PathVariable String username)
+    @PostMapping ("/{username}/aquariums/{aquariumName}/watertests")
+    public void saveWaterTest(@RequestBody WaterTest waterTest, @PathVariable String username, @PathVariable String aquariumName)
     {
-        System.out.println();
-        waterTestService.saveWaterTest(waterTest, username);
+        waterTestService.saveWaterTest(waterTest, username, aquariumName);
     }
 
-    @GetMapping("/{username}/watertests")
-    public List<WaterTest> getAllWaterTest(@PathVariable String username)
+    @GetMapping("/{username}/aquariums/{aquariumName}/watertests")
+    public List<WaterTest> getAllWaterTest(@PathVariable String username, @PathVariable String aquariumName)
     {
-        return waterTestService.getWaterTestHistory(username);
+        return waterTestService.getWaterTestHistory(username, aquariumName);
     }
 
 

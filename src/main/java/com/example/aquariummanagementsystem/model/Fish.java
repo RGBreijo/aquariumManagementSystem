@@ -10,11 +10,14 @@ public class Fish
     private Long id;
 
     @ManyToOne
-    private User user;
+    private Aquarium aquarium;
 
      private String name;
      private int quantity;
 
+    public Fish()
+    {
+    }
 
     public Long getId()
     {

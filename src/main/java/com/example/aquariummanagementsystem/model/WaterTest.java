@@ -13,7 +13,7 @@ public class WaterTest
     private Long id;
 
     @ManyToOne
-    private User user;
+    private Aquarium aquarium;
 
     Date conductedOn;
 
@@ -83,9 +83,9 @@ public class WaterTest
         this.phLvl = phLvl;
     }
 
-    public void setUser(User user)
+    public void setAquarium(Aquarium user)
     {
-        this.user = user;
+        this.aquarium = user;
     }
 
     @Override
