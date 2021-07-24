@@ -15,6 +15,9 @@ import java.util.List;
 @Repository
 public interface WaterTestRepository extends JpaRepository<WaterTest, Long>
 {
-    WaterTest findByConductedOn(Date conductedOn);
+    WaterTest findByConductedOn(Date conductedOn); // where calling this?
     List<WaterTest> findAllByAquarium(Aquarium user);
+    WaterTest findByConductedOnAndAquarium(Date date, Aquarium aquarium);
+
+    void deleteByConductedOnAndAquarium(Date date, Aquarium aquarium);
 }

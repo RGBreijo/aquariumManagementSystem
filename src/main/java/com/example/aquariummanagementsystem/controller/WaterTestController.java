@@ -9,6 +9,7 @@ import java.util.List;
 
 
 @RestController
+@CrossOrigin
 public class WaterTestController
 {
     private final WaterTestService waterTestService;

@@ -70,4 +70,35 @@ public class WaterTestService
             }
         }
     }
+
+
+    public void deleteWaterTest(String username, String aquariumName, Date date)
+    {
+        User user = userRepository.findByUsername(username);
+
+        if(user != null)
+        {
+            Aquarium aquarium = aquariumRepository.findByUserAndName(user, aquariumName);
+            if(aquarium != null && date != null)
+            {
+                waterTestRepository.deleteByConductedOnAndAquarium(date, aquarium);
+            }
+        }
+    }
+
+    public WaterTest getWaterTest(String username, String aquariumName, Date date)
+    {
+        User user = userRepository.findByUsername(username);
+
+        if(user != null)
+        {
+            Aquarium aquarium = aquariumRepository.findByUserAndName(user, aquariumName);
+            if(aquarium != null && date != null)
+            {
+                return waterTestRepository.findByConductedOnAndAquarium(date, aquarium);
+            }
+        }
+
+        return null;
+    }
 }
