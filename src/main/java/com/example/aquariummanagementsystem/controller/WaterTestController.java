@@ -32,8 +32,4 @@ public class WaterTestController
     {
         return waterTestService.getWaterTestHistory(username, aquariumName);
     }
-
-
-
-    // username/watertests/1
 }

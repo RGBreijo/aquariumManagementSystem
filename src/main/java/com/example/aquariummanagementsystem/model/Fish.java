@@ -1,5 +1,7 @@
 package com.example.aquariummanagementsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,6 +11,7 @@ public class Fish
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     private Aquarium aquarium;
 
@@ -47,5 +50,15 @@ public class Fish
     public void setQuantity(int quantity)
     {
         this.quantity = quantity;
+    }
+
+    public Aquarium getAquarium()
+    {
+        return aquarium;
+    }
+
+    public void setAquarium(Aquarium aquarium)
+    {
+        this.aquarium = aquarium;
     }
 }
