@@ -3,35 +3,34 @@ package com.example.aquariummanagementsystem.service;
 import com.example.aquariummanagementsystem.model.Aquarium;
 import com.example.aquariummanagementsystem.model.User;
 import com.example.aquariummanagementsystem.repository.AquariumRepository;
-import com.example.aquariummanagementsystem.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AquariumService
 {
     private final AquariumRepository aquariumRepository;
-    private final UserRepository userRepository;
+    private final UserService userService;
 
 
-    public AquariumService(AquariumRepository aquariumRepository, UserRepository userRepository)
+    @Autowired
+    public AquariumService(AquariumRepository aquariumRepository, UserService userService)
     {
         this.aquariumRepository = aquariumRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     public void createAquarium(Aquarium aquarium, String username)
     {
-        User user = userRepository.findByUsername(username);
+        User user = userService.findByUsername(username);
         if(user != null)
         {
             user.getAquariums().add(aquarium);
             aquarium.setUser(user);
 
-            userRepository.save(user);
+            userService.save(user);
             aquariumRepository.save(aquarium);
-            System.out.println("Inside");
         }
-        System.out.println("Outside");
     }
 
 

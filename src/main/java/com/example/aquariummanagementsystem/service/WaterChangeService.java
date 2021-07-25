@@ -3,7 +3,6 @@ package com.example.aquariummanagementsystem.service;
 import com.example.aquariummanagementsystem.model.Aquarium;
 import com.example.aquariummanagementsystem.model.User;
 import com.example.aquariummanagementsystem.model.WaterChange;
-import com.example.aquariummanagementsystem.repository.UserRepository;
 import com.example.aquariummanagementsystem.repository.WaterChangeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
