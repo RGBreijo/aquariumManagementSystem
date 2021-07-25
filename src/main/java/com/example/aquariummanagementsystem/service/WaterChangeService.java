@@ -1,5 +1,6 @@
 package com.example.aquariummanagementsystem.service;
 
+import com.example.aquariummanagementsystem.model.Aquarium;
 import com.example.aquariummanagementsystem.model.User;
 import com.example.aquariummanagementsystem.model.WaterChange;
 import com.example.aquariummanagementsystem.repository.UserRepository;
@@ -13,17 +14,44 @@ import java.util.List;
 public class WaterChangeService
 {
     private final WaterChangeRepository waterChangeRepository;
-    private final UserRepository userRepository;
+    private final UserService userService;
+    private final AquariumService aquariumService;
 
     @Autowired
-    public WaterChangeService(WaterChangeRepository waterChangeRepository, UserRepository userRepository)
+    public WaterChangeService(WaterChangeRepository waterChangeRepository, UserService userService, AquariumService aquariumService)
     {
         this.waterChangeRepository = waterChangeRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
+        this.aquariumService = aquariumService;
     }
 
-    public List<WaterChange> getWaterChangeHistory()
+    public void saveWaterChange(String username, String aquariumName, WaterChange waterChange)
     {
-        return waterChangeRepository.findAll();
+        User user = userService.findByUsername(username);
+        if(user != null)
+        {
+            Aquarium aquarium = aquariumService.findByUserAndName(user, aquariumName);
+            if(aquarium != null)
+            {
+                aquarium.getWaterChanges().add(waterChange); // do I need to save it or is it saved without it?
+                waterChange.setAquarium(aquarium);
+                aquariumService.save(aquarium);
+                waterChangeRepository.save(waterChange);
+            }
+        }
+    }
+
+    public List<WaterChange> getWaterChangeHistory(String username, String aquariumName)
+    {
+        User user = userService.findByUsername(username);
+        if(user != null)
+        {
+            Aquarium aquarium = aquariumService.findByUserAndName(user, aquariumName);
+            if(aquarium != null)
+            {
+                return waterChangeRepository.findAllByAquarium(aquarium);
+            }
+        }
+        return null;
     }
 }

@@ -15,7 +15,7 @@ public class WaterTest
     @ManyToOne
     private Aquarium aquarium;
 
-    Date conductedOn;
+    private Date conductedOn;
 
     private Double nitrateLvl;
     private Double nitriteLvl;

@@ -1,7 +1,6 @@
 package com.example.aquariummanagementsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -16,7 +15,6 @@ public class Aquarium
     {
     }
 
-    // unique per user?????
     private String name;
 
     @OneToMany(mappedBy = "aquarium")
@@ -24,6 +22,9 @@ public class Aquarium
 
     @OneToMany(mappedBy = "aquarium")
     private List<Fish> fish;
+
+    @OneToMany(mappedBy = "aquarium")
+    private List<WaterChange> waterChanges;
 
     @JsonIgnore
     @ManyToOne
@@ -78,5 +79,15 @@ public class Aquarium
     public void setUser(User user)
     {
         this.user = user;
+    }
+
+    public List<WaterChange> getWaterChanges()
+    {
+        return waterChanges;
+    }
+
+    public void setWaterChanges(List<WaterChange> waterChanges)
+    {
+        this.waterChanges = waterChanges;
     }
 }

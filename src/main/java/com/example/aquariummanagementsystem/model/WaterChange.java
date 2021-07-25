@@ -1,10 +1,9 @@
 package com.example.aquariummanagementsystem.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class WaterChange
@@ -13,7 +12,13 @@ public class WaterChange
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate waterChanced;
+     private Date waterChanged;
+
+    @JsonIgnore
+    @ManyToOne
+    private Aquarium aquarium;
+
+
 
     public Long getId()
     {
@@ -25,13 +30,23 @@ public class WaterChange
         this.id = id;
     }
 
-    public LocalDate getWaterChanced()
+    public Date getWaterChanged()
     {
-        return waterChanced;
+        return waterChanged;
     }
 
-    public void setWaterChanced(LocalDate waterChanced)
+    public void setWaterChanged(Date waterChanced)
     {
-        this.waterChanced = waterChanced;
+        this.waterChanged = waterChanced;
+    }
+
+    public Aquarium getAquarium()
+    {
+        return aquarium;
+    }
+
+    public void setAquarium(Aquarium aquarium)
+    {
+        this.aquarium = aquarium;
     }
 }

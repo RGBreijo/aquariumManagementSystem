@@ -33,4 +33,16 @@ public class AquariumService
         }
         System.out.println("Outside");
     }
+
+
+    // if same id save overrides
+    public void save(Aquarium aquarium)
+    {
+        aquariumRepository.save(aquarium);
+    }
+
+    public Aquarium findByUserAndName(User user, String aquariumName)
+    {
+        return aquariumRepository.findByUserAndName(user, aquariumName);
+    }
 }
