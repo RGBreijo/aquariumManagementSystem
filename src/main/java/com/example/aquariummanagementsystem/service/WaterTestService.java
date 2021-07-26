@@ -24,6 +24,10 @@ public class WaterTestService
         this.aquariumService = aquariumService;
     }
 
+
+
+
+
     public List<WaterTest> getWaterTestHistory(String username, String aquariumName)
     {
         User user = userService.findByUsername(username);
@@ -40,11 +44,21 @@ public class WaterTestService
             return null;
     }
 
-    public WaterTest getWaterTest(Date date)
+    public void updateWaterTest(WaterTest waterTest, String username, String aquariumName)
     {
-        return waterTestRepository.findByConductedOn(date);
-    }
+        User user = userService.findByUsername(username);
 
+        if(user != null)
+        {
+            Aquarium aquarium = aquariumService.findByUserAndName(user, aquariumName);
+
+            if(aquarium != null)
+            {
+
+                // find the water test
+            }
+        }
+    }
 
     public void saveWaterTest(WaterTest waterTest, String username, String aquariumName)
     {

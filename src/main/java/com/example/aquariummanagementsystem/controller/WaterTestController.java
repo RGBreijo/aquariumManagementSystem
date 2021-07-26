@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -30,9 +31,21 @@ public class WaterTestController
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/{username}/aquariums/{aquariumName}/watertests")
+    @GetMapping("/{username}/aquariums/{aquariumName}/watertests/all")
     public List<WaterTest> getAllWaterTest(@PathVariable String username, @PathVariable String aquariumName)
     {
         return waterTestService.getWaterTestHistory(username, aquariumName);
+    }
+
+    @GetMapping("/{username}/aquariums/{aquariumName}/watertests")
+    public void getWaterTest(@RequestBody Date date, @PathVariable String username, @PathVariable String aquariumName)
+    {
+        waterTestService.getWaterTest(username, aquariumName, date);
+    }
+
+    @DeleteMapping("/{username}/aquariums/{aquariumName}/watertests")
+    public void deleteWaterTest(@RequestBody Date date, @PathVariable String username, @PathVariable String aquariumName)
+    {
+       waterTestService.deleteWaterTest(username, aquariumName, date);
     }
 }
