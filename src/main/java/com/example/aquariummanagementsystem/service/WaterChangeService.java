@@ -40,6 +40,12 @@ public class WaterChangeService
         }
     }
 
+    public WaterChange getWaterChange(Long id)
+    {
+        return waterChangeRepository.findById(id).orElse(null);
+    }
+
+
     public List<WaterChange> getWaterChangeHistory(String username, String aquariumName)
     {
         User user = userService.findByUsername(username);
@@ -52,5 +58,21 @@ public class WaterChangeService
             }
         }
         return null;
+    }
+
+
+    public void deleteWaterChange(Long id)
+    {
+        waterChangeRepository.deleteById(id);
+    }
+
+    public void updateWaterChange(WaterChange updatedWaterChange)
+    {
+        WaterChange waterchange = waterChangeRepository.findById(updatedWaterChange.getId()).orElse(null);
+        if(waterchange != null)
+        {
+            waterchange.setWaterChanged(updatedWaterChange.getWaterChanged());
+            waterChangeRepository.save(waterchange);
+        }
     }
 }

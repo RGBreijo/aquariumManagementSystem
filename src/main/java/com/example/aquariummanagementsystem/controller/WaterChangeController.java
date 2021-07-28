@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-// set the next water change
-// add a water change
-
 @RestController
+@RequestMapping("/{username}/aquariums/{aquariumName}/waterchanges")
 public class WaterChangeController
 {
 
@@ -22,17 +20,33 @@ public class WaterChangeController
         this.waterChangeService = waterChangeService;
     }
 
-    @GetMapping("/{username}/aquariums/{aquariumName}/waterChange")
-    List<WaterChange> waterChangeHistory(@PathVariable String username, @PathVariable String aquariumName)
+    @GetMapping("/all")
+    public List<WaterChange> waterChangeHistory(@PathVariable String username, @PathVariable String aquariumName)
     {
         return waterChangeService.getWaterChangeHistory(username, aquariumName);
     }
 
-    @PostMapping("/{username}/aquariums/{aquariumName}/waterChange")
-    void saveWaterChange(@RequestBody WaterChange waterChange, @PathVariable String username, @PathVariable String aquariumName)
+    @GetMapping("/{id}")
+    public WaterChange getWaterChange(@PathVariable Long id)
+    {
+        return waterChangeService.getWaterChange(id);
+    }
+
+    @PostMapping
+    public void saveWaterChange(@RequestBody WaterChange waterChange, @PathVariable String username, @PathVariable String aquariumName)
     {
          waterChangeService.saveWaterChange(username, aquariumName, waterChange);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteWaterChange(@PathVariable Long id)
+    {
+        waterChangeService.deleteWaterChange(id);
+    }
 
+    @PutMapping
+    public void updateWaterChange(@RequestBody WaterChange waterChange)
+    {
+        waterChangeService.updateWaterChange(waterChange);
+    }
 }
