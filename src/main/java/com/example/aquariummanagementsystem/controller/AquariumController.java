@@ -17,7 +17,7 @@ public class AquariumController
         this.aquariumService = aquariumService;
     }
 
-    @PostMapping("{username}/aquarium")
+    @PostMapping("{username}/aquariums")
     public void createAquarium(@RequestBody Aquarium aquarium, @PathVariable String username)
     {
         aquariumService.createAquarium(aquarium, username);

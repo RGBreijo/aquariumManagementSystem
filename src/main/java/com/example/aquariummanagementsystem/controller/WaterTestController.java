@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/{username}/aquariums/{aquariumName}")
 public class WaterTestController
 {
     private final WaterTestService waterTestService;
@@ -21,15 +22,28 @@ public class WaterTestController
         this.waterTestService = waterTestService;
     }
 
-    @PostMapping ("/{username}/aquariums/{aquariumName}/watertests")
+    @PostMapping ("/watertests")
     public void saveWaterTest(@RequestBody WaterTest waterTest, @PathVariable String username, @PathVariable String aquariumName)
     {
         waterTestService.saveWaterTest(waterTest, username, aquariumName);
     }
 
-    @GetMapping("/{username}/aquariums/{aquariumName}/watertests")
+    @GetMapping("/watertest/all")
     public List<WaterTest> getAllWaterTest(@PathVariable String username, @PathVariable String aquariumName)
     {
         return waterTestService.getWaterTestHistory(username, aquariumName);
     }
+
+    @GetMapping("/watertest/{id}}")
+    public WaterTest getWaterTest(@PathVariable Long id)
+    {
+        return waterTestService.getWaterTest(id);
+    }
+
+    @PutMapping ("/watertests")
+    public void updateWaterTest(@RequestBody WaterTest waterTest)
+    {
+        waterTestService.updateWaterTest(waterTest);
+    }
+
 }

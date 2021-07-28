@@ -40,11 +40,6 @@ public class WaterTestService
             return null;
     }
 
-    public WaterTest getWaterTest(Date date)
-    {
-        return waterTestRepository.findByConductedOn(date);
-    }
-
 
     public void saveWaterTest(WaterTest waterTest, String username, String aquariumName)
     {
@@ -65,34 +60,31 @@ public class WaterTestService
         }
     }
 
-
-    public void deleteWaterTest(String username, String aquariumName, Date date)
+    public void updateWaterTest(WaterTest updatedWaterTest)
     {
-        User user = userService.findByUsername(username);
+        WaterTest waterTest = waterTestRepository.findById(updatedWaterTest.getId()).orElse(null);
 
-        if(user != null)
+        if(waterTest != null)
         {
-            Aquarium aquarium = aquariumService.findByUserAndName(user, aquariumName);
-            if(aquarium != null && date != null)
-            {
-                waterTestRepository.deleteByConductedOnAndAquarium(date, aquarium);
-            }
+            // Not Ideal
+            waterTest.setAmmoniaLvl(updatedWaterTest.getAmmoniaLvl());
+            waterTest.setPhLvl(updatedWaterTest.getPhLvl());
+            waterTest.setNitrateLvl(updatedWaterTest.getNitrateLvl());
+            waterTest.setNitriteLvl(updatedWaterTest.getNitriteLvl());
+            waterTest.setConductedOn(updatedWaterTest.getConductedOn());
+            waterTestRepository.save(waterTest);
         }
+//        waterTestRepository.save(updatedWaterTest);
     }
 
-    public WaterTest getWaterTest(String username, String aquariumName, Date date)
+    public void deleteWaterTest(Long waterTestId)
     {
-        User user = userService.findByUsername(username);
+        waterTestRepository.deleteById(waterTestId);
+    }
 
-        if(user != null)
-        {
-            Aquarium aquarium = aquariumService.findByUserAndName(user, aquariumName);
-            if(aquarium != null && date != null)
-            {
-                return waterTestRepository.findByConductedOnAndAquarium(date, aquarium);
-            }
-        }
 
-        return null;
+    public WaterTest getWaterTest(Long waterTestId)
+    {
+      return waterTestRepository.findById(waterTestId).orElse(null);
     }
 }
