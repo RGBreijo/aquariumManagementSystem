@@ -40,7 +40,7 @@ public class WaterTestController
         return waterTestService.getWaterTest(id);
     }
 
-    @PutMapping ("/watertests")
+    @PutMapping 
     public void updateWaterTest(@RequestBody WaterTest waterTest)
     {
         waterTestService.updateWaterTest(waterTest);
