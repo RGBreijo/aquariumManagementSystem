@@ -34,14 +34,37 @@ public class AquariumService
     }
 
 
-    // if same id save overrides
-    public void save(Aquarium aquarium)
+
+    public void updateAquariumName(Aquarium updatedAquarium)
     {
-        aquariumRepository.save(aquarium);
+        Aquarium aquarium = aquariumRepository.findById(updatedAquarium.getId()).orElse(null);
+
+        if(aquarium != null)
+        {
+            aquarium.setName(updatedAquarium.getName());
+            aquariumRepository.save(aquarium);
+        }
+
+    }
+
+    public void deleteAquarium(Long id)
+    {
+        aquariumRepository.deleteById(id);
+    }
+
+    public Aquarium getAquarium(Long id)
+    {
+        return aquariumRepository.findById(id).orElse(null);
     }
 
     public Aquarium findByUserAndName(User user, String aquariumName)
     {
         return aquariumRepository.findByUserAndName(user, aquariumName);
     }
+
+    public void save(Aquarium aquarium)
+    {
+        aquariumRepository.save(aquarium);
+    }
+
 }
