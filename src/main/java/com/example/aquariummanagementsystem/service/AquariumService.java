@@ -6,6 +6,8 @@ import com.example.aquariummanagementsystem.repository.AquariumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AquariumService
 {
@@ -60,6 +62,17 @@ public class AquariumService
     public Aquarium findByUserAndName(User user, String aquariumName)
     {
         return aquariumRepository.findByUserAndName(user, aquariumName);
+    }
+
+    public List<Aquarium> getAllAquarium(String username)
+    {
+        User user = userService.findByUsername(username);
+        if(user != null)
+        {
+           return aquariumRepository.findAllByUser(user);
+        }
+
+        return null;
     }
 
     public void save(Aquarium aquarium)

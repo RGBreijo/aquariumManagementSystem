@@ -5,6 +5,8 @@ import com.example.aquariummanagementsystem.service.AquariumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("{username}/aquariums")
@@ -36,6 +38,11 @@ public class AquariumController
         aquariumService.updateAquariumName(aquarium);
     }
 
+    @GetMapping("/all")
+    public List<Aquarium> getAllAquariums(@PathVariable String username)
+    {
+        return aquariumService.getAllAquarium(username);
+    }
 
 
 }

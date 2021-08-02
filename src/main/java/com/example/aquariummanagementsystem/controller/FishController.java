@@ -1,15 +1,15 @@
 package com.example.aquariummanagementsystem.controller;
 
 import com.example.aquariummanagementsystem.model.Fish;
-import com.example.aquariummanagementsystem.model.WaterTest;
 import com.example.aquariummanagementsystem.service.FishService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@CrossOrigin
+@RequestMapping("/{username}/aquariums/{aquariumName}/fish")
 public class FishController
 {
     private final FishService fishService;
@@ -20,9 +20,17 @@ public class FishController
         this.fishService = fishService;
     }
 
-    @PostMapping("/{username}/aquariums/{aquariumName}/fish")
+    @PostMapping
     public void saveWaterTest(@RequestBody Fish fish, @PathVariable String username, @PathVariable String aquariumName)
     {
         fishService.saveFish(username, aquariumName, fish);
     }
+
+    @GetMapping("/all")
+    public List<Fish> getAllFish(@PathVariable String username, @PathVariable String aquariumName)
+    {
+        return fishService.getAllFish(username, aquariumName);
+    }
+
+
 }

@@ -7,6 +7,8 @@ import com.example.aquariummanagementsystem.repository.FishRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FishService
 {
@@ -41,6 +43,22 @@ public class FishService
                 fishRepository.save(fish);
             }
         }
+    }
+
+    public List<Fish> getAllFish(String username, String aquariumName)
+    {
+        User user = userService.findByUsername(username);
+
+        if(user != null)
+        {
+            Aquarium aquarium = aquariumService.findByUserAndName(user, aquariumName);
+            if(aquarium != null)
+            {
+                return aquarium.getFish();
+            }
+        }
+
+        return null;
     }
 
 
